@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> Generating colourful boxes using D3.js</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <link rel="stylesheet" href="part2.css">
+</head>
+<body>
+  <h1 class="heading">Generating colourful random boxes using D3.js</h1>
+  <div id="color-map"></div>
+  <button id="generate-button">click here for  New Colors</button>
+  <script>
+    const colorMapContainer = d3.select("#color-map");
+    function getRandomColor() {
+      const letters = "0123456789ABCDEF";
+      let color = "#";
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+    for (let i = 0; i < 10; i++) {
+      colorMapContainer.append("div")
+        .attr("class", "color-box")
+        .style("background-color", getRandomColor());
+    }
+    const generateButton = document.querySelector("#generate-button");
+    generateButton.addEventListener("click", function() {
+      colorMapContainer.selectAll("div")
+        .style("background-color", getRandomColor());
+    });
+  </script>
+</body>
+</html>
